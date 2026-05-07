@@ -1,0 +1,21 @@
+{
+  "rules": {
+    "users": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && auth.uid == $uid",
+        "status": { ".validate": "newData.isString()" },
+        "lastSeen": { ".validate": "newData.isNumber()" },
+        "currentCall": { 
+          ".read": "auth != null", 
+          ".write": "auth != null" 
+        }
+      },
+      ".indexOn": ["shortID", "email"]
+    },
+    "calls": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
