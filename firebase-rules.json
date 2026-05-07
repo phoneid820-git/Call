@@ -1,0 +1,26 @@
+{
+  "rules": {
+    "users": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && auth.uid == $uid",
+        ".read": "auth != null && auth.uid == $uid",
+        ".create": "auth != null && auth.uid == $uid",
+        "status": { ".validate": "newData.isString()" },
+        "lastSeen": { ".validate": "newData.isNumber()" },
+        "name": { ".validate": "newData.isString()" },
+        "shortID": { ".validate": "newData.isString()" },
+        "dp": { ".validate": "newData.isString()" },
+        "currentCall": { 
+          ".read": "auth != null", 
+          ".write": "auth != null" 
+        }
+      },
+      ".indexOn": ["shortID", "email"]
+    },
+    "calls": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
